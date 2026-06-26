@@ -25,8 +25,6 @@ Bad decision: "This is a promising approach that warrants further investigation 
 
 Good decision: "Pass. The technique requires NVLink between all GPU pairs, and our clusters use PCIe. Their Figure 6 shows the approach is actually slower than baseline on PCIe interconnect, which they mention in one sentence on page 9 and never discuss again. If we upgrade to NVLink nodes next year, revisit this."
 
-Bad effort estimate: "Implementation effort would depend on various factors and team capacity."
-
 Good effort estimate: "PoC: 3 days for one engineer to patch the scheduler in vLLM, 1 day to run against our staging traces. MVP: 2 weeks to add config options, monitoring hooks, and fallback to default scheduling. Production: 6 weeks including load testing, multi-model validation, and runbook documentation. The PoC is cheap enough that the risk of wasting 3 days is worth the potential 1.5x throughput gain."
 
 ### Voice

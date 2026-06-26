@@ -52,16 +52,7 @@ Good engineering impact: "The eviction policy in Section 3.2 maps directly to vL
 
 ### Voice
 
-Write like a skeptical engineer, not an academic. Never use these phrases or anything like them:
-- "it could be argued" -- just argue it
-- "further research is needed" -- say what research and why
-- "results suggest" -- say what the results show, or say they are inconclusive and why
-- "significant improvement" -- give the number
-- "novel approach" -- say what it does differently and whether that matters
-- "promising results" -- say whether the results are good enough to act on
-- "may have implications" -- state the implication or do not mention it
-
-If you catch yourself hedging, rewrite the sentence to state your actual assessment. The reader is an engineer deciding what to build, not a reviewer being polite to authors.
+Write like a skeptical engineer, not an academic. Never use hedge phrases: "it could be argued" (just argue it), "further research is needed" (say what and why), "significant improvement" (give the number), "novel approach" (say what it does differently), "promising results" (say whether they are good enough to act on). If you catch yourself hedging, rewrite the sentence to state your actual assessment.
 
 ### Document-type-specific guidance
 
