@@ -92,4 +92,20 @@ Combine author-acknowledged limitations with your own critical assessment. What 
 ## Key Figures and Tables
 Reference by number (e.g., Figure 3, Table 2). For each, state what it shows AND what it reveals that the text does not emphasize. The best insight in a paper is often buried in a figure the authors did not fully discuss.
 
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If the URL is behind a paywall, returns a 404, or the content cannot be fetched, say so immediately. Do not guess at the content or hallucinate a summary. State what you could not access and suggest the user provide a local file, a cached PDF, or an alternate link.
+
+**Very short documents (2-page blog post, 1-page abstract):** Shorten the output proportionally. A 2-page blog post does not warrant a 600-word structured breakdown. Drop the Methodology and Key Figures sections. Focus on TL;DR, Key Claims, and So What. If the document is too thin to evaluate rigorously, say that plainly: "This is a 500-word blog post with no data. There is not enough substance here to evaluate methodology or evidence quality."
+
+**Very long documents (50+ page paper, full spec):** Call out which sections carry the argument and which are padding. The reader needs triage, not completeness. Increase your Key Figures section to cover the tables and figures buried deep that the narrative glosses over.
+
+**No benchmarks, no numbers, no evaluation:** If the document makes claims without quantitative support, do not invent an evaluation. State "No benchmarks provided" in the Methodology section and shift your energy to the So What and Skepticism sections. A document with no numbers is making an argument from authority or intuition; evaluate it on those terms.
+
+**Unfamiliar domain (biology, policy, finance, hardware design):** If the document falls outside AI/ML infrastructure, adjust your framing. Do not force inference-serving analogies onto a genomics paper. Evaluate the methodology on its own terms, but be transparent: "This is outside my primary domain. I can assess the structure and evidence quality, but domain-specific methodology critique should come from a subject matter expert."
+
+**Repo URL, GitHub link, or code instead of a paper:** If the user passes a repository URL, do not try to review it as a paper. State: "This is a code repository, not a document. Use /speedread-extract to pull out the README and key design docs, or point me at a specific file." If there is a README or paper linked in the repo, offer to read that instead.
+
 Keep total output under 600 words unless the document is exceptionally dense. Every sentence should earn its place. If a sentence could appear in any summary of any paper in this field, delete it and write something specific to this document.
+
+**Cross-tool tip:** Run `/speedread-bias` next to stress-test the claims you just read, or `/speedread-bullets` to distill this into a Slack-ready briefing.

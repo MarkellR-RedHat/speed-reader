@@ -64,3 +64,19 @@ If you had to explain this document in a single sentence to someone walking past
 - Do not oversimplify to the point of being wrong. If something is genuinely complex, say "this part is complex" and explain why, rather than pretending it is simple. A reader who knows they do not fully understand something is better off than a reader who thinks they understand but does not.
 - No filler phrases. "It is important to note that" and "it is worth mentioning that" can always be deleted. Just state the thing.
 - Every section should pass the "so what" test. If the reader's reaction to a sentence is "so what?" then either rewrite it to answer that question or delete it.
+
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If the document cannot be fetched, say so in plain language. Do not guess at what a paywalled paper might contain. State the problem and ask for an alternate source.
+
+**Very short documents (2-page blog, abstract only):** If the document is already short and non-technical, an ELI5 might be redundant. Say so: "This is a 400-word blog post written in plain language. You do not need a simplified version; just read it. It takes 2 minutes." If it still has jargon worth translating, keep the ELI5 but trim to 150 words or less.
+
+**Very long documents (50+ page paper, detailed spec):** Focus the ELI5 on the single core finding or proposal. Do not try to simplify 50 pages into 300 words by covering everything shallowly. Pick the one idea that matters most and explain it well. Mention that the document covers more ground, but do not try to ELI5 all of it.
+
+**Highly technical with no clear real-world connection:** Some documents are deeply theoretical with no obvious business or product impact. If the "Why Should We Care?" section would require a chain of five speculative steps to reach a business outcome, be honest: "This is foundational research. The practical impact is 2-5 years out and depends on several open problems being solved first." Do not manufacture urgency.
+
+**Unfamiliar domain:** ELI5 is especially useful for cross-domain documents, but be careful not to oversimplify in ways that are wrong. If a biology or physics paper uses concepts you cannot accurately analogize, say "this part is complex and the analogy breaks down" rather than forcing a misleading comparison.
+
+**Repo URL or code:** ELI5 is for documents, not codebases. If the user passes a repo link, redirect: "This is a code repo. Try `/speedread-eli5` on the README, or use `/speedread` for a technical summary of a specific document."
+
+**Cross-tool tip:** After the ELI5, run `/speedread-bias` to check whether the simplified version glossed over any red flags worth knowing about.

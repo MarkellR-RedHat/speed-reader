@@ -64,3 +64,19 @@ Focus your annotations on these areas:
 Not every paragraph needs an annotation. Annotate densely in the sections that matter (the core claims, the experimental setup, the key results) and lightly or not at all in sections that are background or filler. A good annotated document has 8-15 annotations total, clustered around the parts that carry the argument.
 
 Keep annotations concise: one to three sentences each. You are writing margin notes, not a second paper. Every annotation should make the reader smarter about the passage it accompanies. If an annotation merely restates what the passage already says clearly, delete it and annotate something the reader would miss on their own.
+
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If you cannot fetch the document, say so immediately. Do not annotate content you cannot see. State the access problem and ask the user for a local file or alternate link.
+
+**Very short documents (2-page blog, executive summary):** Reduce annotation density to 3-5 notes total. A short document does not need 15 margin notes; that buries the text under commentary. Focus your annotations on the 1-2 claims that actually matter and whether they have evidence behind them.
+
+**Very long documents (50+ pages):** Do not annotate everything. Tell the reader upfront which sections to skip and which to read. Cluster your annotations in the sections that carry the argument (usually 3-4 sections out of 12+). For the rest, a single "Skip this section" annotation is sufficient.
+
+**No benchmarks or data:** If the document is entirely qualitative, shift your annotations from "is this number trustworthy" to "is this reasoning sound." Annotate logical leaps, unsupported assertions, and places where the author substitutes authority for evidence. Note the absence of data as its own annotation: "No numbers anywhere in this section. The claim is pure assertion."
+
+**Unfamiliar domain:** If the document covers a field you lack deep context in, annotate what you can (structure, evidence quality, logical consistency) and flag what you cannot: "I lack domain expertise to evaluate whether this biological mechanism claim is standard or novel. Verify with a subject matter expert."
+
+**Repo URL or code instead of a document:** If the user passes a GitHub link or source code, state that annotations are designed for prose documents, not code. Suggest `/speedread-extract` for pulling structured data from a repo README, or `/speedread` for a standard summary.
+
+**Cross-tool tip:** Follow up with `/speedread-questions` to generate pointed questions about the weakest claims your annotations flagged.

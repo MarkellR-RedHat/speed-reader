@@ -69,4 +69,20 @@ Before finalizing your comparison, verify:
 - Have you traced disagreements to root causes, or just described them? "They disagree" is observation. "They disagree because Paper A tested on NVLink and Paper B tested on PCIe" is analysis.
 - Does your Bottom Line contain a concrete next step? If the reader walks away not knowing what to do, the comparison failed.
 
+### Edge Cases
+
+**One or both URLs broken, paywalled, or inaccessible:** If you cannot access one document, say which one failed and why. Do not compare a document you read against one you imagined. Offer to proceed with a single-document review using `/speedread` or `/speedread-bias` on the accessible one.
+
+**Mismatched document types (paper vs. tweet, RFC vs. blog post):** If the two documents are wildly different in depth and rigor, say so upfront: "These are not comparable on equal terms. Document A is a 30-page peer-reviewed paper; Document B is a 600-word blog post. The blog post cannot match the paper's evidence quality by definition." Still compare what you can, but weight your verdict accordingly.
+
+**Documents that solve different problems:** If the two documents address different problems that merely share vocabulary, say so in the first sentence and save the reader from a false comparison. "These documents both mention KV cache optimization, but Paper A is about memory management and Paper B is about scheduling. Comparing them is like comparing a database and a load balancer because both handle requests."
+
+**Very short documents (both under 3 pages):** Shorten the comparison proportionally. Drop the "Why the Results Differ" section if both documents are too thin to have meaningful methodology differences. Focus on claims and evidence quality.
+
+**No overlapping benchmarks or metrics:** If the documents measure different things, state that the comparison is necessarily qualitative. Do not force a quantitative comparison where none exists. "Paper A reports throughput; Paper B reports latency. Without shared metrics, the comparison is about approach and evidence quality, not numbers."
+
+**Repo URL instead of a paper:** If one input is a GitHub repo, redirect: "Comparison requires two documents. For a repo, try `/speedread-extract` on the README or point me at a specific doc within the repo."
+
 Keep total output under 500 words. The reader is choosing between two things, not studying both in depth.
+
+**Cross-tool tip:** After picking a winner, run `/speedread-implement` on it to turn the comparison verdict into a concrete engineering plan.

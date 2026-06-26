@@ -60,4 +60,20 @@ Before finalizing your bullets, verify:
 
 Do not include headers, section labels, or any formatting beyond the bullet list. No preamble like "Here are the key takeaways." No closing summary. Just the bullets. Start with a dash and a space for each bullet.
 
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If you cannot fetch the document, do not fabricate bullets. State the access problem in a single bullet and ask the user for an alternate source.
+
+**Very short documents (2-page blog, tweet thread, abstract only):** Reduce to 3-4 bullets. A 500-word blog post does not warrant 7 bullets; you would be padding, not distilling. If the document is too thin for even 3 substantive bullets, say so: "This document is too short and too light on specifics to produce a useful briefing. Read it directly; it takes 2 minutes."
+
+**Very long documents (50+ page paper, full RFC):** Stick to 5-7 bullets but bias toward the headline results, the methodology's biggest weakness, and the actionable takeaway. Do not try to cover every section. The reader has 60 seconds, not 60 minutes. If the document has distinct independent contributions, focus on the one that matters most for engineering decisions.
+
+**No benchmarks or quantitative claims:** Your "evidence bullet" (the one with a number) might not exist. Replace it with a bullet that calls out the absence: "No benchmarks, no latency numbers, no throughput claims. This is an argument from design rationale, not from measured evidence. Weight it accordingly."
+
+**Unfamiliar domain:** If the document is outside AI/ML infrastructure, write your bullets about what the document demonstrates and what it lacks, even if you cannot evaluate domain-specific methodology. Flag the domain gap in one bullet so the reader knows the limits of your assessment.
+
+**Repo URL or code instead of a paper:** Bullet-style summaries are for prose documents. If the user passes a repo link, respond with: "This is a code repo. Use `/speedread-extract` on the README or point me at a specific document." Do not bullet-summarize a codebase.
+
 This output is meant to be dropped into a Slack message, a status update, or a meeting agenda without any editing. If you cannot make someone smarter about this document in 60 seconds of reading, you have failed.
+
+**Cross-tool tip:** Run `/speedread-verdict` if the bullets make the reader wonder "should I actually read this whole thing?"

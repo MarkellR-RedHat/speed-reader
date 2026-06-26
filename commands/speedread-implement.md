@@ -96,4 +96,20 @@ One paragraph. Given the effort, risk, and potential value: should we pursue thi
 
 **Product docs:** Focus on build-vs-buy analysis. Can we get this capability cheaper by using their product, or is building our own the right call given our requirements and constraints? Factor in the total cost: licensing, integration, migration, and lock-in.
 
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If you cannot access the document, do not speculate about implementation. You cannot estimate effort for a technique you have not read. State the access problem and ask for an alternate source.
+
+**Very short documents (2-page blog, brief announcement):** A short document with no technical detail cannot support an implementation plan. Say so: "This document describes a result but provides no implementation detail. There is not enough here to estimate effort, identify risks, or scope a PoC. Find the full paper or technical report behind this announcement." If a linked paper exists, suggest running `/speedread-implement` on that instead.
+
+**Very long documents (50+ page paper with multiple contributions):** Focus the implementation plan on the single most actionable contribution, not all of them. State which contribution you are scoping and why. If the reader wants implementation plans for multiple techniques, they should run this command once per technique.
+
+**No benchmarks, no evaluation, no numbers:** If the document provides a technique but no measured results, adjust The Decision accordingly. Without numbers, the PoC scope expands because you are not validating a known improvement; you are discovering whether an improvement exists at all. State that the risk is higher and the PoC should include a measurement phase: "No benchmarks in the paper means the PoC must also establish the baseline and define what 'good enough' looks like."
+
+**Unfamiliar domain (hardware design, biology, policy):** If the document describes a technique outside software engineering, the implementation plan should focus on whether and how the technique can be translated to our stack. Be honest if the translation is speculative: "This is a hardware-level optimization. Software-side implementation would require a CUDA kernel, which is outside our current team's expertise. Factor in ramp-up time or a hire."
+
+**Repo URL or code instead of a paper:** If the user passes a GitHub repo, pivot the implementation plan from "translate paper to code" to "evaluate existing code for integration." Assess: Is the code production-quality or research-grade? What is the license? Does it have tests? Can it be imported as a dependency, or does it need to be forked and maintained? This is a build-vs-adopt decision, not a build-from-scratch plan.
+
 Keep total output under 500 words. Every sentence should help an engineering manager decide whether to put this on the roadmap.
+
+**Cross-tool tip:** Run `/speedread-bias` first to check whether the paper's numbers are trustworthy before scoping effort based on them.

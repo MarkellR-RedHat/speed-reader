@@ -86,4 +86,20 @@ A paragraph summarizing the document's overall reliability. State:
 
 **Product docs:** Focus on benchmark conditions (are they realistic?), what is not documented (silent limitations), and whether the comparison against competitors is fair. Check whether "up to X% faster" is measured under conditions you would actually encounter.
 
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If you cannot access the document, say so. Do not assign a trust score to something you have not read. State the problem and ask for a local copy or alternate link.
+
+**Very short documents (2-page blog, brief announcement):** A short document with no methodology section gets a trust score based on what it does provide. If it provides no evidence at all, the trust score is low by definition. Do not pad the checklist with "N/A" for every item; instead write a compact assessment: "This is a 400-word announcement with no methodology, no benchmarks, and no citations. Trust score: 2/10. Treat as marketing until independently verified."
+
+**Very long documents (50+ page paper, full spec):** Focus the bias review on the headline claims and the methodology that supports them. Do not try to bias-check every result in a 60-page paper. Prioritize the claims that would change engineering decisions if true.
+
+**No benchmarks, no numbers:** If the document has no quantitative claims, skip the "Numbers and Metrics" parts of the checklist. Focus on Conflict of Interest, Baseline Comparisons (even conceptual ones), and Uncited Claims. A document without numbers is not automatically untrustworthy, but it is making a different kind of argument that requires different scrutiny.
+
+**Unfamiliar domain:** If you lack deep expertise in the document's field, say so in your trust score justification. You can still evaluate structural bias (funding conflicts, missing baselines, cherry-picked comparisons) without domain expertise. Flag domain-specific methodology questions you cannot answer and recommend the reader consult a specialist.
+
+**Repo URL or code:** A bias review of source code does not make sense. If the user passes a repo link, redirect: "Bias review applies to documents making claims. For code, try `/speedread-extract` on the README or `/speedread` on any linked paper."
+
 Keep total output under 600 words. The trust score should be the first thing the reader sees. The reader came here because they want to know whether they can build on this. Give them a clear answer.
+
+**Cross-tool tip:** Pair with `/speedread-compare` if you have a competing paper, so you can see which set of biases cancel out and which compound.

@@ -64,4 +64,20 @@ Based on the current document's results, limitations, and open questions: what r
 
 **Product docs:** Trace the technology stack's lineage. What open source projects, research papers, or standards does this product build on? Understanding the foundation helps assess the product's trajectory and lock-in risks.
 
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If the document cannot be fetched, say so. Do not guess at the reference chain. A lineage built on a document you have not read is fiction.
+
+**Very short documents (2-page blog, brief announcement):** Short documents rarely have robust reference sections. If the document cites nothing or cites only itself, say so directly: "This document has no meaningful reference chain. There is no intellectual lineage to trace." Offer to run `/speedread` on a more substantial source if the user can find one.
+
+**Very long documents (50+ page survey, monograph):** Surveys cite hundreds of papers. Do not list them all. Focus on the 5 that the survey's own argument depends on most heavily. Ignore political citations and breadth-for-completeness references.
+
+**No references section, no citations:** Blog posts and product docs often cite nothing. State that upfront: "This document provides no citations. The intellectual lineage cannot be traced from the document itself." If you can identify the underlying ideas from context (e.g., a blog post clearly describes PagedAttention without citing it), note what the likely sources are and that the attribution is your inference, not the author's.
+
+**Unfamiliar domain:** If the document's references are in a field you lack deep context in, trace the structural lineage (which references are cited most, which appear in the methodology section vs. related work) but flag that you cannot assess whether these are the right foundational references for the field. Recommend domain expert validation.
+
+**Repo URL or code instead of a paper:** Code repositories do not have reference sections. If the user passes a GitHub link, redirect: "Lineage tracing requires a document with citations. Try `/speedread-chain` on a paper linked in the repo's README, or use `/speedread-extract` to pull out referenced papers from the docs."
+
 Keep total output under 600 words.
+
+**Cross-tool tip:** Use the reading order output from this command, then run `/speedread` on each paper in sequence to build layered understanding fast.

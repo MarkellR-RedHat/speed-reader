@@ -68,3 +68,19 @@ List any significant claims made without supporting evidence, citation, or data.
 **Blog posts:** Separate hard numbers from vague claims like "significantly faster" or "dramatically improved." List vague claims in the Uncited Claims section explicitly. Flag any numbers given without methodology, hardware details, or reproducible setup. A blog post number without methodology is marketing, not data. Extract product announcements and timeline commitments as their own category.
 
 **Product docs:** Extract pricing tiers, rate limits, supported platforms, SLA figures, and API version requirements. Note what is GA vs. beta vs. roadmap. Extract the quiet limitations that only appear in footnotes, FAQ sections, or "known issues" pages. These silent constraints are often the most important facts in the document for production planning.
+
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If you cannot access the document, state the problem immediately. Do not extract data from content you have not read. Ask for a local file or alternate link.
+
+**Very short documents (2-page blog, brief announcement):** A short document yields a sparse extraction. That is fine. Report what is there and note what is absent. A 500-word blog post with one number and no methodology produces a short Numbers section and a long Uncited Claims section. That sparse output is the honest answer.
+
+**Very long documents (50+ page paper, full spec):** Extraction from long documents is where this command earns its keep. Be thorough in Numbers and Tools sections. Check appendices, supplementary materials, and footnotes; the most useful data points are often buried there. Prioritize completeness over brevity for long documents.
+
+**No benchmarks, no numbers:** If the document is entirely qualitative, the Numbers section reads "None found." Do not skip the section. The absence of quantitative claims is itself a finding worth reporting. Shift your extraction energy to Uncited Claims and Limitations.
+
+**Unfamiliar domain:** Extract what you can see (numbers, tools, people, limitations) even if you cannot fully assess whether a metric is impressive or expected. Flag your uncertainty: "This metric appears to be domain-standard, but I lack the context to confirm. Verify with a subject matter expert."
+
+**Repo URL or code:** If the user passes a GitHub link, extract from the README, CONTRIBUTING.md, and any docs/ directory content. Treat code comments and docstrings as extractable content. For the Tools section, extract dependencies from package manifests (requirements.txt, go.mod, Cargo.toml). State that you are extracting from repo documentation, not from a research paper.
+
+**Cross-tool tip:** Feed the extracted numbers into `/speedread-compare` to build a side-by-side decision matrix against a competing paper or product.

@@ -66,4 +66,20 @@ A bad question:
 
 Output the questions as a numbered list. After each question, add one sentence explaining why this question matters: what it would reveal about the document's reliability or applicability if answered honestly.
 
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If you cannot access the document, do not generate questions about content you have not seen. State the access problem and ask for an alternate source.
+
+**Very short documents (2-page blog, abstract only):** A short document might only support 2-3 meaningful questions. That is fine. Do not pad to 5 by asking generic questions. If the document is too thin to generate pointed questions, say: "This document is too brief and too light on specifics to generate probing questions. The right question is: where is the full paper?"
+
+**Very long documents (50+ page paper, detailed spec):** Focus questions on the headline claims and the methodology that supports them. Do not generate questions about every section. A 50-page paper still has 2-3 load-bearing claims; aim your questions there.
+
+**No benchmarks, no data, no evaluation:** The best question for a document with no data is about the absence itself: "What prevents you from measuring this?" Follow up with questions about what evidence would change the reader's confidence level. Do not pretend the document has methodology to question when it does not.
+
+**Unfamiliar domain:** Generate questions about evidence structure and logical consistency even if you lack domain expertise. "Your control group has N=12 participants" is a valid sample-size question regardless of field. Flag that domain-specific methodology questions should come from a specialist.
+
+**Repo URL or code instead of a paper:** Questions about code are different from questions about papers. If the user passes a repo link, pivot to engineering questions: "What happens under load? What are the failure modes? Where are the tests? What is the upgrade path?" Or redirect to `/speedread` on a linked document.
+
 Generate 5 to 7 questions. Quality over quantity. One question that exposes a fundamental assumption is worth more than five questions that nibble at the edges.
+
+**Cross-tool tip:** Run `/speedread-annotate` first to identify the weakest claims, then use this command to sharpen those observations into questions you can bring to a paper discussion or author Q&A.

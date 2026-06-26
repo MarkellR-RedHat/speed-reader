@@ -82,4 +82,20 @@ One sentence. The single most important takeaway. Make it specific enough to be 
 
 **Product docs:** The verdict should focus on whether this product solves a problem we actually have, at a price and integration cost we can accept, without creating dependencies we cannot escape. If we do not need this, say "skip it" regardless of how well-written it is.
 
+### Edge Cases
+
+**Paywall, broken URL, or inaccessible content:** If you cannot access the document, the verdict is immediate: "Cannot access this document. Provide a local file, a cached PDF, or an alternate link." Do not render a verdict on something you have not read.
+
+**Very short documents (2-page blog, abstract only):** A 2-page blog post does not need a verdict on whether it is "worth 45 minutes." It is worth 3 minutes by definition. Say so: "This is a short blog post. Read it or skip it; either way costs you 3 minutes, not 45. The claim is X, the evidence is Y, and you can decide in one pass." Adjust the output to match the document's actual weight.
+
+**Very long documents (50+ page paper, survey, full spec):** The verdict is especially valuable here because the reader is deciding whether to commit serious time. Be specific about which sections justify the investment and which do not. "Read Sections 3-5 (the core contribution, 12 pages). Skip the rest. Budget 20 minutes, not 2 hours."
+
+**No benchmarks, no numbers:** A document with no quantitative evidence is harder to verdict. Base your verdict on whether the ideas are novel and well-argued, not on missing data. But flag it: "No benchmarks. Your confidence in the claims should be proportionally lower. If you need numbers, look for follow-up work that evaluated this idea empirically."
+
+**Unfamiliar domain:** If the document is outside your core expertise, adjust your confidence and say so. You can still assess novelty (does it read like a rehash?), evidence quality (is there data?), and writing quality (does it waste the reader's time?). Flag that domain-specific novelty assessment should come from a specialist.
+
+**Repo URL or code:** A verdict on a codebase is a different question than a verdict on a paper. If the user passes a repo, redirect: "Verdict is for documents. For a repo, check the README with `/speedread` or evaluate the code directly." If there is a linked paper in the repo, offer to verdict that.
+
 Keep total output under 400 words. This is the command for when someone says "should I read this?" Respect that question by being decisive, not diplomatic. Your reader has 14 other papers in their queue.
+
+**Cross-tool tip:** If the verdict is "read it," follow up with `/speedread` for the full structured summary, or `/speedread-implement` if you already know you want to build on it.
