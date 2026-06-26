@@ -1,10 +1,11 @@
 #!/bin/bash
-# install.sh -- Install ai-bu-speed-reader commands into Claude Code
+# ============================================================================
+# ai-bu-speed-reader installer
 #
-# Copies all speedread command files to ~/.claude/commands/ so they are
-# available as slash commands in Claude Code. Safe to re-run; existing
-# command files with the same names will be overwritten with the latest
-# versions.
+# Copies all speedread commands to ~/.claude/commands/ so they show up as
+# slash commands in Claude Code. Safe to re-run at any time; existing files
+# with the same names are overwritten with the latest versions.
+# ============================================================================
 
 set -euo pipefail
 
@@ -12,49 +13,53 @@ COMMANDS_DIR="$HOME/.claude/commands"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SOURCE_DIR="$SCRIPT_DIR/commands"
 
-# Verify source commands exist
+echo ""
+echo "  ai-bu-speed-reader"
+echo "  Turn 30-page PDFs into actionable intelligence in under a minute."
+echo ""
+
+# ---- Verify source directory exists ----------------------------------------
+
 if [ ! -d "$SOURCE_DIR" ]; then
-    echo "Error: commands/ directory not found at $SOURCE_DIR"
-    echo "Are you running this from the ai-bu-speed-reader repository root?"
+    echo "  ERROR: commands/ directory not found at $SOURCE_DIR"
+    echo "  Make sure you are running this from the ai-bu-speed-reader repo root."
     exit 1
 fi
 
-echo "Installing ai-bu-speed-reader commands..."
-echo ""
+# ---- Create target directory ------------------------------------------------
 
-mkdir -p "$COMMANDS_DIR"
+if [ ! -d "$COMMANDS_DIR" ]; then
+    echo "  Creating $COMMANDS_DIR ..."
+    mkdir -p "$COMMANDS_DIR"
+fi
 
-# Copy all command files
+# ---- Copy each command file -------------------------------------------------
+
 installed=0
 for cmd_file in "$SOURCE_DIR"/speedread*.md; do
     if [ -f "$cmd_file" ]; then
+        name="$(basename "$cmd_file" .md)"
         cp "$cmd_file" "$COMMANDS_DIR/"
+        echo "  installed  /$name"
         installed=$((installed + 1))
     fi
 done
 
+echo ""
+
 if [ "$installed" -eq 0 ]; then
-    echo "Error: No speedread command files found in $SOURCE_DIR"
+    echo "  ERROR: No speedread command files found in $SOURCE_DIR"
+    echo "  The commands/ directory may be empty or corrupted."
     exit 1
 fi
 
-echo "Installed $installed commands to $COMMANDS_DIR:"
+# ---- Done -------------------------------------------------------------------
+
+echo "  $installed commands installed to $COMMANDS_DIR"
 echo ""
-echo "  Core:"
-echo "    /speedread             Full structured analysis with chain-of-thought reasoning"
-echo "    /speedread-verdict     Should you read this? Decisive verdict, not a summary"
-echo "    /speedread-bullets     5-7 bullet points, ready to drop into Slack"
+echo "  Next steps:"
+echo "    1. Restart Claude Code (or open a new session)"
+echo "    2. Try your first command:"
 echo ""
-echo "  Deep Analysis:"
-echo "    /speedread-implement   Translate research into engineering actions and effort estimates"
-echo "    /speedread-bias        Skeptical peer review with trust score (1-10)"
-echo "    /speedread-chain       Intellectual lineage and pedagogical reading order"
-echo "    /speedread-annotate    Inline margin notes from a skeptical senior engineer"
+echo "       /speedread-verdict path/to/paper.pdf"
 echo ""
-echo "  Extraction and Comparison:"
-echo "    /speedread-compare     Side-by-side comparison with a clear winner"
-echo "    /speedread-extract     Extract every number, tool, limitation, and open question"
-echo "    /speedread-questions   Peer-reviewer-quality questions that probe real weaknesses"
-echo "    /speedread-eli5        Plain-language explanation for non-technical readers"
-echo ""
-echo "Done. Restart Claude Code to pick up the new commands."

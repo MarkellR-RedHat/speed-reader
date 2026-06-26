@@ -1,22 +1,36 @@
 # ai-bu-speed-reader
 
-Fifteen papers in your "to read" folder. You will get to three of them this quarter. Which three? And what if you could get the key insight from all fifteen in an afternoon?
+You have 15 papers in your to-read pile. You will get to three of them this quarter. Maybe. The rest sit there, accumulating guilt and potentially containing the one insight that would have changed your design.
 
-These are not summaries. A summary gives you the gist. These commands give you the insight you would have gotten if you had read the paper carefully: the core contribution, the methodology gaps, the practical implications, and the honest assessment of whether the paper is worth your time at all.
+What if you could get the key insight from all fifteen in an afternoon?
 
-Claude Code slash commands that turn 30-page PDFs into actionable intelligence in under a minute. Built for engineers who read papers to make decisions, not to write book reports.
+## Before and After
 
-## The Two Commands You Will Use Most
+**Before speed-reader:** Someone drops a paper in Slack. You open it, skim the abstract, promise yourself you will read it this weekend. You do not read it this weekend. Three months later you discover it described the exact architecture you just spent two sprints building from scratch.
 
-### `/speedread-verdict` -- Should I read this?
+**After speed-reader:** Someone drops a paper in Slack. You run `/speedread-verdict paper.pdf`. Sixty seconds later you know whether to read it, skim it, or skip it, and why. You run `/speedread-implement paper.pdf` on the one that matters and walk into standup with a PoC plan and realistic effort estimates.
 
-Someone drops a paper in Slack. You have 30 seconds. Run this.
+## Quick Start
+
+```bash
+git clone https://github.com/MarkellR-RedHat/ai-bu-speed-reader.git
+cd ai-bu-speed-reader
+bash install.sh
+```
+
+Then restart Claude Code and try this on any PDF, markdown file, or URL:
 
 ```
 /speedread-verdict path/to/paper.pdf
 ```
 
-You get a decisive, opinionated verdict. Not a diplomatic summary. A real answer.
+That is it. You will get a decisive, opinionated verdict in under a minute.
+
+## What You Get
+
+These are not summaries. A summary gives you the gist. These commands give you the insight you would have gotten if you had read the paper carefully: the core contribution, the methodology gaps, the practical implications, and an honest assessment of whether the paper is worth your time at all.
+
+### Example: `/speedread-verdict`
 
 ```
 ## Verdict
@@ -29,31 +43,19 @@ is evaluated on synthetic traces only.
 ## The Weakest Argument
 They report only mean latency, not P99. The benchmark uses batch size 1,
 which flatters their approach. They compare against the previous version
-of their own system, not against vLLM or TGI. These three choices all
-push the results in the same direction.
+of their own system, not against vLLM or TGI.
 
 ## If You Only Remember One Thing
 Save your 45 minutes. Read Splitwise instead if you haven't already.
 ```
 
-Sometimes the best thing a reading tool can do is tell you NOT to read something.
-
-### `/speedread-implement` -- How would we use this?
-
-You read a paper and thought "we could build that." Run this.
-
-```
-/speedread-implement path/to/paper.pdf
-```
-
-You get the core idea translated into engineering terms, a realistic PoC plan, and honest effort estimates. The paper says "we achieve 3x throughput improvement." This command tells you: "They tested on 4 A100s with synthetic workloads. In our environment with real traffic patterns and mixed model sizes, expect 1.5-2x. Here is why, and here is how to test it."
+### Example: `/speedread-implement`
 
 ```
 ## The Core Idea, Translated
 A load balancer that routes inference requests to separate GPU pools for
 the "understanding the question" phase and the "generating the answer"
-phase, with a lightweight RPC mechanism to transfer cached state between
-pools. It is gRPC-based request routing with a feedback loop.
+phase. It is gRPC-based request routing with a feedback loop.
 
 ## Simplest Proof of Concept
 - Build: Memory-pressure-aware router in front of two vLLM instances
@@ -62,9 +64,9 @@ pools. It is gRPC-based request routing with a feedback loop.
 - Effort: 3-5 engineering days
 
 ## The Decision
-Pursue as a PoC next sprint. The PoC is cheap (1 week), and even if the
-paper's 3x number drops to 1.5x in our environment, that is still worth
-the MVP investment. If the PoC shows less than 1.3x, stop.
+Pursue as a PoC next sprint. Even if the paper's 3x number drops to 1.5x
+in our environment, that is still worth the MVP investment. If the PoC
+shows less than 1.3x, stop.
 ```
 
 ## All 11 Commands
@@ -81,7 +83,7 @@ the MVP investment. If the PoC shows less than 1.3x, stop.
 
 | Command | What it does | When to use it |
 |---------|-------------|----------------|
-| `/speedread-implement` | Translates research into PoC specs, realistic effort estimates, and go/no-go recommendations | When you are considering building something based on a paper |
+| `/speedread-implement` | Translates research into PoC specs, realistic effort estimates, and go/no-go recommendations | When you are considering building something from a paper |
 | `/speedread-bias` | Skeptical peer review with trust score (1-10), covering baselines, benchmarks, statistics, and conflicts of interest | Before you trust a paper enough to build on it |
 | `/speedread-chain` | Maps the intellectual lineage, traces the 5 most important references, produces a pedagogical reading order | When you need to understand a research area, not just one paper |
 | `/speedread-annotate` | Inline margin notes from a skeptical senior engineer on every major claim, number, and methodology choice | When you want someone experienced reading over your shoulder |
@@ -90,22 +92,12 @@ the MVP investment. If the PoC shows less than 1.3x, stop.
 
 | Command | What it does | When to use it |
 |---------|-------------|----------------|
-| `/speedread-compare` | Side-by-side comparison of two documents with a clear winner and the reasoning to back it | When you need to choose between two approaches |
+| `/speedread-compare` | Side-by-side comparison of two documents with a clear winner and the reasoning behind it | When you need to choose between two approaches |
 | `/speedread-extract` | Extracts every number, tool, limitation, open question, and uncited claim with full context | Building comparison spreadsheets or populating decision matrices |
 | `/speedread-questions` | 5-7 peer-reviewer-quality questions that target specific gaps, not general areas | Meeting prep, reading groups, or pressure-testing before you build |
 | `/speedread-eli5` | Plain-language explanation in under 300 words that a PM could brief to leadership | Briefing someone from another team who is smart but not in your field |
 
 All commands automatically detect document type (academic paper, RFC/spec, blog post, product docs, report) and adjust their analysis accordingly.
-
-## Install
-
-```bash
-git clone https://github.com/MarkellR-RedHat/ai-bu-speed-reader.git
-cd ai-bu-speed-reader
-bash install.sh
-```
-
-This copies the command files to `~/.claude/commands/`. Restart Claude Code to pick them up.
 
 ## Usage
 
@@ -132,10 +124,10 @@ Every prompt is written from the perspective of a skeptical engineer who has alr
 
 The `reference/` directory includes practical guides for technical reading:
 
-- `reference/reading-strategies.md` -- Six reading strategies matched to different goals: triage reads (2 minutes), three-pass method, adversarial reads, synthesis reads, executive reads, and implementation reads.
-- `reference/common-benchmarks.md` -- What MLPerf, MMLU, HumanEval, SWE-bench, vLLM benchmarks, and others actually measure, their known limitations, and how to spot inflated claims that cite them.
-- `reference/reading-papers.md` -- The three-pass method for academic papers, red flags to watch for, and what to look for in our specific context.
-- `reference/reading-rfcs.md` -- How to read RFCs, KEPs, and technical proposals efficiently.
+- `reference/reading-strategies.md` - Six reading strategies matched to different goals: triage reads (2 minutes), three-pass method, adversarial reads, synthesis reads, executive reads, and implementation reads.
+- `reference/common-benchmarks.md` - What MLPerf, MMLU, HumanEval, SWE-bench, vLLM benchmarks, and others actually measure, their known limitations, and how to spot inflated claims that cite them.
+- `reference/reading-papers.md` - The three-pass method for academic papers, red flags to watch for, and what to look for in our specific context.
+- `reference/reading-rfcs.md` - How to read RFCs, KEPs, and technical proposals efficiently.
 
 ## Supported Input Formats
 
