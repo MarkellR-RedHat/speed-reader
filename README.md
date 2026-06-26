@@ -1,20 +1,58 @@
 # ai-bu-speed-reader
 
-Claude Code commands for producing structured summaries of technical papers, long documents, and web pages. Built for engineers who need to extract the signal from a 30-page PDF in under a minute.
+Claude Code slash commands that turn 30-page PDFs into actionable intelligence in under a minute. Built for engineers who read papers to make decisions, not to write book reports.
 
-## What It Does
+## The Two Commands You Will Use Most
 
-Seven slash commands for Claude Code, each tuned for a different reading task:
+### `/speedread-verdict` -- Should I read this?
 
-- `/speedread` - Full structured summary: TL;DR, key claims, methodology, results, relevance to our work, limitations, and key figures/tables. Stays under 500 words unless you ask for more. Adapts its analysis based on document type (academic paper, RFC, blog post, product doc).
-- `/speedread-compare` - Takes two papers or docs and produces a side-by-side comparison: where they agree, where they disagree, and which is more relevant to our work.
-- `/speedread-bullets` - Ultra-short variant. 5-7 bullet points. For when someone drops a paper in Slack and you need the gist in 30 seconds.
-- `/speedread-annotate` - Produces an annotated version of the document with inline commentary. Like having a senior colleague read it over your shoulder and mark it up.
-- `/speedread-questions` - Generates 5-7 sharp discussion questions. Use this to prep before a paper review meeting or reading group.
-- `/speedread-extract` - Pulls out structured data: all numbers/metrics, all cited tools/products, all future work items, all limitations. Good for building comparison spreadsheets or tracking what tools a paper uses.
-- `/speedread-eli5` - Explains the document in plain language for non-technical stakeholders. No jargon, no acronyms without definitions, concrete analogies.
+Someone drops a paper in Slack. You have 30 seconds. Run this.
 
-All commands automatically detect the document type (academic paper, RFC/spec, blog post, product docs, report) and adjust their analysis accordingly.
+```
+/speedread-verdict path/to/paper.pdf
+```
+
+You get: a one-sentence verdict (read it, skim it, or skip it), the strongest and weakest arguments, what is genuinely novel vs. well-known, what is missing, and one takeaway to remember. Decisive, not diplomatic.
+
+### `/speedread-implement` -- How would we use this?
+
+You read a paper and thought "we could build that." Run this.
+
+```
+/speedread-implement path/to/paper.pdf
+```
+
+You get: the core idea translated into engineering terms, what we would build, the simplest proof of concept (days not months), infrastructure requirements, risks, t-shirt-sized effort estimates, and a go/no-go recommendation.
+
+## All 11 Commands
+
+### Core
+
+| Command | What it does | When to use it |
+|---------|-------------|----------------|
+| `/speedread` | Full structured summary with chain-of-thought analysis, confidence-tagged claims, and engineering impact assessment | Default starting point for any document |
+| `/speedread-verdict` | One-sentence verdict, strongest/weakest arguments, novelty assessment | When someone asks "should I read this?" |
+| `/speedread-bullets` | 5-7 bullet points, no headers, no filler | Drop into Slack or a status update |
+
+### Deep Analysis
+
+| Command | What it does | When to use it |
+|---------|-------------|----------------|
+| `/speedread-implement` | Translates research into PoC specs, effort estimates, and go/no-go recommendations | When you are considering building something based on a paper |
+| `/speedread-bias` | Methodology audit with trust score (1-10), covering sample size, benchmark fairness, baseline validity, reproducibility, and conflicts of interest | Before you trust a paper enough to build on it |
+| `/speedread-chain` | Maps the 5 most important references, traces the intellectual lineage, produces a reading order for newcomers | When you need to understand a research area, not just one paper |
+| `/speedread-annotate` | Annotated version with inline critical commentary on claims, numbers, methodology choices, and gaps | When you want a senior engineer's margin notes |
+
+### Extraction and Comparison
+
+| Command | What it does | When to use it |
+|---------|-------------|----------------|
+| `/speedread-compare` | Side-by-side comparison of two documents with a clear winner | When you need to choose between two approaches |
+| `/speedread-extract` | Extracts every number, tool, limitation, open question, and uncited claim | Building comparison spreadsheets or tracking research tools |
+| `/speedread-questions` | 5-7 peer-reviewer-quality questions that probe genuine weaknesses | Meeting prep, reading groups, or pressure-testing before you build |
+| `/speedread-eli5` | Plain-language explanation in under 300 words, no jargon | Briefing a PM, director, or someone from another team |
+
+All commands automatically detect document type (academic paper, RFC/spec, blog post, product docs, report) and adjust their analysis accordingly.
 
 ## Install
 
@@ -28,181 +66,128 @@ This copies the command files to `~/.claude/commands/`. Restart Claude Code to p
 
 ## Usage
 
-### Full summary
+Every command takes a file path or URL as input:
 
 ```
 /speedread path/to/paper.pdf
 /speedread https://arxiv.org/abs/2401.12345
-```
-
-### Compare two documents
-
-```
 /speedread-compare paper-a.pdf paper-b.pdf
+/speedread-verdict https://blog.example.com/new-inference-engine
 ```
 
-### Quick bullets
+## What Makes These Commands Different
 
-```
-/speedread-bullets path/to/paper.pdf
-```
+These are not generic summarizers. Every command includes:
 
-### Annotated reading
-
-```
-/speedread-annotate path/to/paper.pdf
-```
-
-### Meeting prep questions
-
-```
-/speedread-questions path/to/paper.pdf
-```
-
-### Extract structured data
-
-```
-/speedread-extract path/to/paper.pdf
-```
-
-### Plain-language explanation
-
-```
-/speedread-eli5 path/to/paper.pdf
-```
+- **Chain-of-thought reasoning:** The command walks through a structured analysis process before producing output. It classifies the document, identifies the core contribution, evaluates the evidence, and maps the implications before writing a single word of summary.
+- **Self-critique:** Before outputting, the command checks whether its summary captures what makes THIS document unique, whether the implications are grounded in specific engineering actions, and whether it is using exact numbers instead of approximations.
+- **Anti-pattern avoidance:** The commands are explicitly told not to summarize every section equally, not to use "interesting" without explaining why, not to miss the core contribution in favor of peripheral details, and not to produce a summary that could describe any paper in the field.
+- **Document-type awareness:** Academic papers, RFCs, blog posts, product docs, and reports each get different treatment. A blog post gets its marketing claims flagged. An RFC gets its migration burden assessed. A paper gets its baselines checked.
 
 ## Example Output
 
-### `/speedread` on an inference optimization paper
+### `/speedread-verdict` on an inference optimization paper
 
 ```
-## TL;DR
-This paper introduces a disaggregated serving architecture that separates prefill
-and decode phases across GPU pools, achieving 2.3x higher throughput on LLaMA-70B
-compared to standard vLLM deployments while maintaining P99 latency under 500ms.
+## Verdict
+Read this. First rigorous evidence that disaggregated inference scales past 32
+GPUs with sub-linear overhead, and we are betting our llm-d architecture on
+exactly that claim being true.
 
-## Key Claims
-1. Disaggregating prefill and decode onto separate GPU pools improves throughput
-   by 2.3x at equivalent latency targets.
-2. KV cache transfer overhead between pools is negligible at less than 3% of
-   total request time for sequences under 4096 tokens.
-3. The architecture scales linearly with additional decode nodes up to 32 GPUs.
+## The Strongest Argument
+The KV cache transfer overhead measurements are comprehensive: tested across
+5 sequence lengths, 3 network configurations, and 2 model architectures,
+consistently showing sub-15ms transfer times. This is the hardest data point
+in the paper and the most useful for our work.
 
-## Methodology
-Benchmarked on LLaMA-70B and Mixtral-8x7B using ShareGPT request traces.
-Compared against vLLM v0.3.1 baseline on A100-80GB clusters with 100Gbps
-interconnect. Measured throughput (requests/sec) and latency (P50, P95, P99).
+## The Weakest Argument
+The "linear scaling" claim is based on throughput measurements up to 32 GPUs
+only, then extrapolated. The one data point they have at 64 GPUs shows 15%
+lower efficiency than the linear projection, but they describe this as
+"approximately linear." It is not.
 
-## Results
-- 2.3x throughput improvement on LLaMA-70B at P99 < 500ms
-- 1.8x improvement on Mixtral-8x7B
-- KV cache transfer: 12ms average for 2048-token sequences
-- Linear scaling up to 32 decode GPUs, sublinear beyond that
+## What Is Genuinely Novel
+The cross-pool scheduling algorithm that balances prefill and decode load
+based on real-time memory pressure. Prior disaggregated systems used static
+allocation or simple round-robin.
 
-## So What for Us
-Directly relevant to llm-d and our disaggregated inference work. The KV cache
-transfer numbers validate our architecture choices. The scaling ceiling at 32
-GPUs is worth investigating as we plan larger deployments.
+## What Is Well-Known But Presented as Novel
+The observation that prefill and decode have different compute profiles. This
+has been established since Orca (2022) and is the foundation of most
+disaggregated serving work.
 
-## Limitations and Caveats
-- Tested only on A100s with high-bandwidth interconnect. Results on commodity
-  networking are unknown.
-- ShareGPT traces may not represent enterprise workloads.
-- No evaluation of long-context scenarios beyond 4096 tokens.
+## What Is Missing
+No evaluation under bursty traffic patterns. All tests use Poisson arrival
+rates, which undersells the challenge of real-world request distributions.
 
-## Key Figures and Tables
-- Figure 2: Throughput vs. latency curves showing the 2.3x improvement window.
-- Table 3: KV cache transfer times by sequence length, confirming sub-15ms for
-  typical requests.
-- Figure 5: Scaling efficiency chart showing the 32-GPU inflection point.
+## If You Only Remember One Thing
+KV cache transfer between disaggregated prefill and decode pools costs less
+than 15ms for sequences under 4096 tokens on 100Gbps interconnect -- that is
+the number that validates our llm-d architecture.
 ```
 
-### `/speedread-bullets` on a Kubernetes KEP
+### `/speedread-implement` on the same paper
 
 ```
-- KEP-4381 proposes DRA (Dynamic Resource Allocation) structured parameters for
-  GPU scheduling, replacing the opaque claim-parameter approach with a vendor-neutral
-  schema.
-- Backward compatible with existing DRA implementations; old-style opaque parameters
-  continue to work during the migration window through Kubernetes 1.34.
-- GPU topology awareness is now expressible at the API level, which enables the
-  scheduler to make placement decisions without vendor-specific plugins.
-- Alpha in 1.32, targeted beta in 1.33, with GA graduation criteria requiring at
-  least two conformant vendor implementations.
-- The main risk is that the structured parameter schema may not capture all
-  vendor-specific GPU features, forcing fallback to opaque parameters for advanced
-  use cases.
-- Directly relevant to our AI workload scheduling work: this would let us express
-  multi-GPU topology constraints for inference serving without custom scheduler plugins.
-```
+## The Core Idea, Translated
+A load balancer that routes inference requests to separate GPU pools for the
+"understanding the question" phase and the "generating the answer" phase,
+with a lightweight RPC mechanism to transfer cached state between pools.
 
-### `/speedread-eli5` on a dense ML systems paper
+## What We Would Build
+A scheduling component in llm-d that dynamically assigns requests to prefill
+or decode pools based on current GPU memory utilization, queried via a sidecar
+on each serving node. This would replace the static pool assignment we
+currently use.
 
-```
-## What Is This About?
-When AI models answer questions, there is a two-step process: first understanding
-the question (prefill), then generating the answer word by word (decode). This
-paper asks: what if we used different computers for each step?
+## Simplest Proof of Concept
+- Build: Memory-pressure-aware router in front of two vLLM instances (one
+  prefill, one decode) on a single node with simulated network delay
+- Measure: Throughput (req/s) and P99 latency vs. baseline unified serving
+- Use: Existing vLLM + custom router script + ShareGPT traces
+- Effort: 3-5 engineering days
 
-## What Did They Do?
-Instead of having one computer do both steps, they split the work across two
-groups of computers. Think of it like a restaurant where one team takes orders
-and a separate team cooks the food, instead of having each waiter also be the chef.
+## Infrastructure Requirements
+- Hardware: Minimum 100Gbps networking between prefill and decode pools (the
+  paper shows 25Gbps adds 40ms to transfers -- too slow for production)
+- Software: KV cache serialization/deserialization hooks in vLLM (partially
+  available in v0.4+)
+- Data: ShareGPT traces for initial validation; enterprise traces for
+  production readiness
+- Expertise: vLLM internals, gRPC performance tuning
 
-## What Did They Find?
-The split approach handled 2.3x more requests in the same amount of time. The
-handoff between the two groups added very little delay -- less than 3% of the
-total time per request.
+## Risks and Gotchas
+- Integration risk: KV cache format changes between vLLM versions could
+  break the transfer mechanism
+- Scale risk: Paper tested up to 32 GPUs; our target is 128+
+- Maintenance risk: Two pool types means two scaling policies, two monitoring
+  dashboards, two failure domains
+- Dependency risk: Tight coupling to vLLM's KV cache internals
 
-## Why Should We Care?
-This is basically the architecture we are building with llm-d. Their results
-suggest our approach is on the right track and give us real numbers to benchmark
-against.
+## Estimated Effort
+- PoC: 1 engineer, 1 week. "Works" means demonstrating throughput improvement
+  on a 2-node setup.
+- MVP: 2 engineers, 6 weeks. "Useful" means handling real traffic on a
+  staging cluster with automated pool sizing.
+- Production-ready: 3 engineers, 1 quarter. Adds monitoring, alerting,
+  graceful degradation, and multi-model support.
 
-## What Is the Catch?
-They only tested on expensive, high-end hardware with fast networking between
-machines. We do not know if the results hold on more typical setups.
-
-## One-Sentence Version
-Splitting AI inference into two specialized stages on separate hardware doubles
-throughput with minimal overhead, which validates the direction of our llm-d project.
-```
-
-### `/speedread-extract` on a blog post
-
-```
-## Numbers and Metrics
-- "3x faster cold start times" - for serverless inference endpoints, compared
-  to their previous generation (no specific baseline version given)
-- "150ms P99 latency" - for Llama 3 8B at 512 token output length
-- "$0.24 per million tokens" - pricing for the standard tier
-- "99.9% uptime SLA" - for the enterprise tier only
-
-## Tools, Products, and Technologies
-- Llama 3 8B and 70B - used as benchmark models, open source (Meta license)
-- vLLM v0.4.1 - mentioned as the baseline they outperform, open source (Apache-2.0)
-- NVIDIA TensorRT-LLM - used internally for optimization, proprietary
-- Custom CUDA kernels - referenced but not released, proprietary
-
-## Future Work and Open Questions
-- Multi-model serving on a single endpoint (described as "coming soon," no date)
-- Support for mixture-of-experts architectures (listed on public roadmap)
-
-## Limitations and Constraints
-- P99 latency numbers are for batch size 1 only; no data on concurrent requests
-- Pricing does not include egress or storage costs
-- "3x faster cold start" claim has no methodology or measurement details
-
-## People and Organizations
-- No individual authors credited; published by the company's engineering blog
+## The Decision
+Pursue as a PoC next sprint. The core technique directly applies to llm-d,
+the PoC is cheap (1 week), and the paper's KV cache transfer numbers suggest
+the overhead is acceptable for our latency targets. If the PoC shows even
+1.5x throughput improvement on our hardware, the MVP is worth funding.
+Next step: file a Jira ticket and assign to the llm-d scheduling team.
 ```
 
 ## Reference Materials
 
-The `reference/` directory includes reading guides for common document types:
+The `reference/` directory includes guides for effective technical reading:
 
-- `reference/reading-papers.md` - Tips for reading academic papers efficiently, including the three-pass method and red flags to watch for.
-- `reference/reading-rfcs.md` - Tips for reading RFCs, KEPs, and technical proposals, including what to read first and how to assess migration risk.
+- `reference/reading-strategies.md` -- How to read different document types for maximum retention. Covers triage reads (2 minutes), the three-pass method, adversarial reads for papers you plan to build on, and synthesis reads for understanding a research area.
+- `reference/common-benchmarks.md` -- What MLPerf, MMLU, HumanEval, SWE-bench, vLLM benchmarks, and others actually measure, their known limitations, and how to interpret claims that cite them.
+- `reference/reading-papers.md` -- The three-pass method for academic papers, red flags, and what to look for in our context.
+- `reference/reading-rfcs.md` -- How to read RFCs, KEPs, and technical proposals efficiently.
 
 ## Supported Input Formats
 
