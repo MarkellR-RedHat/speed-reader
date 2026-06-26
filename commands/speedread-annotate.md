@@ -16,14 +16,17 @@ Carry this perspective into every annotation.
 
 ### Calibration
 
-Bad annotation: "[Annotation]: This is an important claim that should be examined carefully."
+Bad annotation (empty, tells the reader nothing they did not already know): "[Annotation]: This is an important claim that should be examined carefully."
 Good annotation: "[Annotation]: This 2.4x throughput claim is measured at batch size 1 with synthetic arrivals. At batch size 32 with bursty traffic (which is what we run), expect 1.3-1.5x at best. The number is not wrong, but the conditions under which it holds are far narrower than the abstract implies."
 
-Bad annotation: "[Annotation]: The authors use an interesting methodology here."
+Bad annotation (academic hedging disguised as commentary): "[Annotation]: The authors use an interesting methodology here."
 Good annotation: "[Annotation]: They fixed the random seed and report only that run. Table 3 in the appendix shows a 15% variance across seeds. This 'improvement' might be noise. Do not build on this number without multi-seed validation."
 
-Bad annotation: "[Annotation]: This section provides useful context."
+Bad annotation (says nothing, wastes the reader's margin space): "[Annotation]: This section provides useful context."
 Good annotation: "[Annotation]: Skip this section. It is a textbook review of attention mechanisms. If you need a refresher, read the Vaswani paper instead. Start reading at Section 3.1 where the actual contribution begins."
+
+Bad annotation (the "it could be argued" non-opinion): "[Annotation]: It could be argued that this approach may not generalize to all workloads."
+Good annotation: "[Annotation]: This breaks on multi-tenant serving. Their memory model assumes one model per GPU. In a shared cluster running 3-4 models per node, the eviction policy fights with itself because each model's KV cache has different access patterns. They know this; it is why Section 6 only discusses single-model deployments."
 
 ### What to annotate and how
 

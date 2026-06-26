@@ -1,6 +1,6 @@
-# Common Benchmarks: What They Actually Measure and Where They Fall Short
+# Common Benchmarks: What They Actually Measure vs. What Papers Pretend They Measure
 
-When a paper claims "state-of-the-art results on X," this guide helps you evaluate whether X measures anything you care about.
+When a paper claims "state-of-the-art results on X," this guide tells you whether X measures anything you care about.
 
 ## ML and LLM Benchmarks
 
@@ -8,8 +8,8 @@ When a paper claims "state-of-the-art results on X," this guide helps you evalua
 - **What it measures:** Multiple-choice question answering across 57 academic subjects, from elementary math to professional law.
 - **What it actually tests:** Pattern matching on academic exam-style questions. Heavily weighted toward memorization and test-taking ability.
 - **Known limitations:** Saturated -- top models score above 90%, making it hard to differentiate. Contains known errors in the ground truth labels. Multiple-choice format does not test generative ability. Scores above 85% often reflect benchmark contamination (the test questions appeared in training data) more than genuine capability.
-- **When to trust it:** Useful for rough capability comparisons between model families. Not useful for predicting real-world task performance.
-- **Red Hat relevance:** Low direct relevance. A model's MMLU score tells you almost nothing about its performance on code generation, infrastructure reasoning, or technical Q&A.
+- **When to trust it:** Useful for rough capability comparisons between model families. Useless for predicting real-world task performance.
+- **Red Hat relevance:** Low. A model's MMLU score tells you almost nothing about its performance on code generation, infrastructure reasoning, or technical Q&A.
 
 ### HumanEval (and HumanEval+)
 - **What it measures:** Code generation. 164 Python programming problems with unit tests.
@@ -67,7 +67,7 @@ When a paper claims "state-of-the-art results on X," this guide helps you evalua
 - **What it actually tests:** Requests per second, time to first token (TTFT), inter-token latency (ITL), and end-to-end latency under various concurrency levels.
 - **Known limitations:** Results depend heavily on the request distribution (input/output length, arrival pattern). ShareGPT traces are commonly used but may not match your workload. Single-node results do not predict multi-node behavior.
 - **When to trust it:** Highly relevant when comparing serving frameworks or evaluating optimization techniques. Check the request distribution carefully.
-- **Red Hat relevance:** Very high. This is our ecosystem. When papers benchmark against vLLM, check the version -- performance has improved substantially across releases.
+- **Red Hat relevance:** Very high. vLLM is our serving engine. When papers benchmark against vLLM, check the version -- performance has improved substantially across releases.
 
 ### ShareGPT Traces
 - **What it measures:** Not a benchmark itself, but a dataset of real conversation request patterns commonly used to drive inference benchmarks.
@@ -98,4 +98,4 @@ When evaluating models or systems for our use cases, weight benchmarks in this o
 5. **Domain-specific benchmarks** relevant to the specific task
 6. **General benchmarks (MMLU, MT-Bench)** as rough capability filters only
 
-General benchmarks are useful for eliminating obviously inadequate models. They are not useful for choosing between the top 3 candidates. For that, you need your own evaluation.
+General benchmarks are useful for eliminating obviously inadequate models. They are useless for choosing between the top 3 candidates. For that, you need your own evaluation on your own workload. There is no shortcut.

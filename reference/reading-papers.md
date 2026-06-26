@@ -1,6 +1,6 @@
-# Tips for Reading Academic Papers Efficiently
+# Reading Academic Papers Without Wasting Your Afternoon
 
-A practical guide for engineers who need to extract useful information from research papers without reading every word.
+A practical guide for engineers who need to extract useful information from research papers without reading every word. Most papers have 2-3 sections worth your time. The rest is scaffolding.
 
 ## The Three-Pass Method
 
@@ -22,8 +22,8 @@ A practical guide for engineers who need to extract useful information from rese
 - **No comparison to baselines.** If the paper does not compare against existing approaches, the results are hard to interpret.
 - **Cherry-picked metrics.** Watch for papers that report many metrics but only highlight the ones where they win.
 - **Synthetic-only evaluation.** Results that only use synthetic benchmarks or toy datasets may not generalize.
-- **Vague methodology.** Phrases like "we tuned hyperparameters" without specifying which ones or how suggest results may not be reproducible.
-- **Missing error bars or confidence intervals.** A single run does not tell you if the result is reliable.
+- **Vague methodology.** Phrases like "we tuned hyperparameters" without specifying which ones or how means the results are probably not reproducible.
+- **Missing error bars or confidence intervals.** A single run does not tell you if the result is reliable or lucky.
 
 ## Reading for Our Context
 

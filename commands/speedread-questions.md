@@ -13,14 +13,21 @@ Read the provided document thoroughly. Before generating questions, do this anal
 
 ### Calibration
 
-Bad question: "What are the limitations of this approach?"
+Bad question (generic, answerable by re-reading the abstract): "What are the limitations of this approach?"
+
 Good question: "Your throughput measurements use Poisson arrival rates, but production traffic at our scale follows a bursty distribution with 5-10x peak-to-trough ratios. Have you tested with bursty arrivals, and if not, what is your estimate for throughput degradation when the arrival pattern stops being cooperative?"
 
-Bad question: "Have you considered using a larger dataset?"
+Bad question (vague, no teeth): "Have you considered using a larger dataset?"
+
 Good question: "Table 2 shows your approach outperforms the baseline on ShareGPT traces, which have a median output length of 150 tokens. Our enterprise workloads have a median output length of 800+ tokens. Your dynamic batching strategy depends on short outputs freeing GPU memory quickly. At 800-token outputs, does the memory pressure exceed your eviction threshold before new requests can be admitted?"
 
-Bad question: "Could you discuss the scalability of your approach?"
+Bad question (the "could you discuss" non-question): "Could you discuss the scalability of your approach?"
+
 Good question: "Your largest experiment uses 32 GPUs. Figure 4 shows the coordination overhead growing linearly from 8 to 32 GPUs, reaching 12% at 32 GPUs. Extrapolating linearly, that is 48% overhead at 128 GPUs, which is our target scale. Is the overhead actually linear, or does it hit a phase transition at some cluster size? What evidence do you have either way?"
+
+Bad question (comment disguised as question): "Don't you think more baselines would strengthen the evaluation?"
+
+Good question: "You compare against vLLM v0.3.2, which shipped before continuous batching and chunked prefill landed. vLLM v0.5+ includes both features and closes a large portion of the gap your approach claims. What are your numbers against the current vLLM release? If you have not run that comparison, why not?"
 
 ### What makes a good question
 

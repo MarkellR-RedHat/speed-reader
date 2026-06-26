@@ -2,7 +2,7 @@
 
 Fifteen papers in your "to read" folder. You will get to three of them this quarter. Which three? And what if you could get the key insight from all fifteen in an afternoon?
 
-These are not summaries. A summary gives you the gist. A reading accelerator gives you the insight you would have gotten if you had read the paper carefully: the core contribution, the methodology gaps, the practical implications, and the honest assessment of whether the paper is worth your time at all.
+These are not summaries. A summary gives you the gist. These commands give you the insight you would have gotten if you had read the paper carefully: the core contribution, the methodology gaps, the practical implications, and the honest assessment of whether the paper is worth your time at all.
 
 Claude Code slash commands that turn 30-page PDFs into actionable intelligence in under a minute. Built for engineers who read papers to make decisions, not to write book reports.
 
@@ -120,16 +120,17 @@ Every command takes a file path or URL as input:
 
 ## What Makes These Different
 
-Every prompt is written from the perspective of a research advisor who has already read the document and is now briefing a busy colleague. The AI does not summarize. It advises.
+Every prompt is written from the perspective of a skeptical engineer who has already read the document and is now briefing a busy colleague. The output is not a summary. It is advice.
 
 - **Opinionated, not diplomatic.** `/speedread-verdict` will tell you to skip a paper. `/speedread-bias` will give a trust score of 3/10 if the methodology is weak. These commands respect your time by being direct.
-- **Calibrated to reality.** `/speedread-implement` automatically discounts paper results for production conditions. A "3x improvement" on synthetic benchmarks becomes "expect 1.5-2x with real traffic" with specific reasoning for the adjustment.
+- **Calibrated to production reality.** `/speedread-implement` automatically discounts paper results for real-world conditions. A "3x improvement" on synthetic benchmarks becomes "expect 1.5-2x with real traffic" with specific reasoning for the adjustment.
 - **Self-critical before output.** Every command checks whether its analysis captures what makes THIS document unique, whether implications are grounded in specific engineering actions, and whether it is using exact numbers from the source.
 - **Document-type-aware.** Academic papers get their baselines checked. Blog posts get their marketing claims flagged. RFCs get their migration burden assessed. Product docs get their lock-in risks called out.
+- **No academic hedging.** You will never see "results suggest," "further research is needed," or "it could be argued" in the output. You get a direct assessment from someone who reads papers to find what is useful for production, not to admire the methodology.
 
 ## Reference Materials
 
-The `reference/` directory includes guides for effective technical reading:
+The `reference/` directory includes practical guides for technical reading:
 
 - `reference/reading-strategies.md` -- Six reading strategies matched to different goals: triage reads (2 minutes), three-pass method, adversarial reads, synthesis reads, executive reads, and implementation reads.
 - `reference/common-benchmarks.md` -- What MLPerf, MMLU, HumanEval, SWE-bench, vLLM benchmarks, and others actually measure, their known limitations, and how to spot inflated claims that cite them.

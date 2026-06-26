@@ -1,6 +1,6 @@
 # Reading Strategies by Document Type
 
-How to read different types of documents for maximum retention and minimum wasted time. Not every document deserves the same level of attention.
+How to read different types of documents for maximum retention and minimum wasted time. Not every document deserves the same attention. Most deserve less than you give them.
 
 ## The Fundamental Question
 
@@ -79,10 +79,10 @@ When the question is "how do we build this?":
 
 ## Reading Speed vs. Retention
 
-Research on reading comprehension consistently shows:
+What actually works, based on cognitive science research:
 
 - **Speed reading does not work** for technical content. Skimming headings and scanning for keywords is effective triage, but comprehension requires slower reading of the sections that matter.
-- **Taking notes doubles retention.** Even brief margin notes or a 3-bullet summary after reading significantly improves recall. The speed-reader commands serve this purpose -- running `/speedread-bullets` after reading forces you to consolidate your understanding.
+- **Taking notes doubles retention.** Even brief margin notes or a 3-bullet summary after reading dramatically improves recall. Running `/speedread-bullets` after reading forces you to consolidate your understanding.
 - **Spaced repetition beats marathon sessions.** Reading a paper twice (once today, once next week) produces better retention than reading it twice today.
 - **Teaching is the strongest retention tool.** If you need to remember a paper, explain it to someone. Use `/speedread-eli5` as a starting framework, then refine it with your own understanding.
 
@@ -98,4 +98,4 @@ Stop reading and move on if you encounter:
 
 ## The 80/20 Rule of Technical Reading
 
-80% of the value from a document comes from 20% of its content. Your job is to find that 20% as fast as possible, extract it, and move on. The speed-reader commands are designed to help with exactly this -- they force the model (and you) to identify what matters rather than summarizing everything equally.
+80% of the value from a document comes from 20% of its content. Your job is to find that 20% as fast as possible, extract it, and move on. The speed-reader commands are built for this: they force identification of what matters rather than equal-weight summarization of everything.

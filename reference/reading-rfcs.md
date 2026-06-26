@@ -1,6 +1,6 @@
-# Tips for Reading Technical RFCs Efficiently
+# Reading RFCs Without Getting Lost in the Spec
 
-A practical guide for engineers who need to evaluate RFCs, KEPs, or technical proposals without getting lost in specification details.
+A practical guide for engineers who need to evaluate RFCs, KEPs, or technical proposals and figure out what actually matters for their work.
 
 ## What Is an RFC in This Context
 
@@ -32,11 +32,11 @@ Look for target release versions, deprecation schedules, and migration windows. 
 
 ## Red Flags
 
-- **No backward compatibility section.** The authors either have not thought about migration or are avoiding the topic.
-- **Vague migration path.** "Users should update their configurations" without specifying how is a sign the migration cost is not well understood.
-- **Missing security considerations.** Required by IETF RFC format and expected in KEPs. If absent, the proposal may not have been thoroughly reviewed.
-- **No alternatives considered.** Either the authors did not explore the design space, or they are not being transparent about trade-offs.
-- **Overly broad scope.** Proposals that try to solve too many problems at once tend to stall or ship incomplete.
+- **No backward compatibility section.** The authors either have not thought about migration or are avoiding the topic. Both are bad.
+- **Vague migration path.** "Users should update their configurations" without specifying how means nobody has actually tried the migration yet.
+- **Missing security considerations.** Required by IETF RFC format and expected in KEPs. If absent, the proposal has not been seriously reviewed.
+- **No alternatives considered.** Either the authors did not explore the design space, or they are hiding the trade-offs.
+- **Overly broad scope.** Proposals that try to solve too many problems at once stall or ship incomplete. Every time.
 
 ## Reading for Our Context
 
