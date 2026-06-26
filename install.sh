@@ -1,44 +1,60 @@
 #!/bin/bash
-# install.sh - Install ai-bu-speed-reader commands into Claude Code
+# install.sh -- Install ai-bu-speed-reader commands into Claude Code
+#
+# Copies all speedread command files to ~/.claude/commands/ so they are
+# available as slash commands in Claude Code. Safe to re-run; existing
+# command files with the same names will be overwritten with the latest
+# versions.
 
-set -e
+set -euo pipefail
 
 COMMANDS_DIR="$HOME/.claude/commands"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SOURCE_DIR="$SCRIPT_DIR/commands"
+
+# Verify source commands exist
+if [ ! -d "$SOURCE_DIR" ]; then
+    echo "Error: commands/ directory not found at $SOURCE_DIR"
+    echo "Are you running this from the ai-bu-speed-reader repository root?"
+    exit 1
+fi
 
 echo "Installing ai-bu-speed-reader commands..."
+echo ""
 
 mkdir -p "$COMMANDS_DIR"
 
-cp "$SCRIPT_DIR/commands/speedread.md" "$COMMANDS_DIR/speedread.md"
-cp "$SCRIPT_DIR/commands/speedread-compare.md" "$COMMANDS_DIR/speedread-compare.md"
-cp "$SCRIPT_DIR/commands/speedread-bullets.md" "$COMMANDS_DIR/speedread-bullets.md"
-cp "$SCRIPT_DIR/commands/speedread-annotate.md" "$COMMANDS_DIR/speedread-annotate.md"
-cp "$SCRIPT_DIR/commands/speedread-questions.md" "$COMMANDS_DIR/speedread-questions.md"
-cp "$SCRIPT_DIR/commands/speedread-extract.md" "$COMMANDS_DIR/speedread-extract.md"
-cp "$SCRIPT_DIR/commands/speedread-eli5.md" "$COMMANDS_DIR/speedread-eli5.md"
-cp "$SCRIPT_DIR/commands/speedread-verdict.md" "$COMMANDS_DIR/speedread-verdict.md"
-cp "$SCRIPT_DIR/commands/speedread-chain.md" "$COMMANDS_DIR/speedread-chain.md"
-cp "$SCRIPT_DIR/commands/speedread-implement.md" "$COMMANDS_DIR/speedread-implement.md"
-cp "$SCRIPT_DIR/commands/speedread-bias.md" "$COMMANDS_DIR/speedread-bias.md"
+# Copy all command files
+installed=0
+for cmd_file in "$SOURCE_DIR"/speedread*.md; do
+    if [ -f "$cmd_file" ]; then
+        cp "$cmd_file" "$COMMANDS_DIR/"
+        installed=$((installed + 1))
+    fi
+done
 
-echo "Installed commands to $COMMANDS_DIR:"
+if [ "$installed" -eq 0 ]; then
+    echo "Error: No speedread command files found in $SOURCE_DIR"
+    exit 1
+fi
+
+echo "Installed $installed commands to $COMMANDS_DIR:"
 echo ""
 echo "  Core:"
-echo "  /speedread             - Structured summary with chain-of-thought analysis"
-echo "  /speedread-verdict     - Should you read this? One-sentence verdict + hot take"
-echo "  /speedread-bullets     - 5-7 bullet points, ready to drop into Slack"
+echo "    /speedread             Full structured analysis with chain-of-thought reasoning"
+echo "    /speedread-verdict     Should you read this? Decisive verdict, not a summary"
+echo "    /speedread-bullets     5-7 bullet points, ready to drop into Slack"
 echo ""
 echo "  Deep Analysis:"
-echo "  /speedread-implement   - Translate research into engineering actions and effort estimates"
-echo "  /speedread-bias        - Methodology audit with trust score (1-10)"
-echo "  /speedread-chain       - Citation chain analysis and recommended reading order"
-echo "  /speedread-annotate    - Annotated version with inline critical commentary"
+echo "    /speedread-implement   Translate research into engineering actions and effort estimates"
+echo "    /speedread-bias        Skeptical peer review with trust score (1-10)"
+echo "    /speedread-chain       Intellectual lineage and pedagogical reading order"
+echo "    /speedread-annotate    Inline margin notes from a skeptical senior engineer"
 echo ""
 echo "  Extraction and Comparison:"
-echo "  /speedread-compare     - Side-by-side comparison of two documents"
-echo "  /speedread-extract     - Extract every number, tool, limitation, and open question"
-echo "  /speedread-questions   - Peer-reviewer-quality discussion questions"
-echo "  /speedread-eli5        - Plain-language explanation for non-technical readers"
+echo "    /speedread-compare     Side-by-side comparison with a clear winner"
+echo "    /speedread-extract     Extract every number, tool, limitation, and open question"
+echo "    /speedread-questions   Peer-reviewer-quality questions that probe real weaknesses"
+echo "    /speedread-eli5        Plain-language explanation for non-technical readers"
 echo ""
 echo "Done. Restart Claude Code to pick up the new commands."
