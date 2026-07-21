@@ -114,10 +114,10 @@ Supported formats: PDF, Markdown, plain text, and URLs (web pages, blog posts, o
 
 Speed Reader pairs well with other tools in the suite:
 
-- Run `/speedread-bullets` on a paper, then feed the output to [`/cfp-generator`](https://github.com/MarkellR-RedHat/ai-bu-cfp-generator) when the research inspires a talk proposal.
-- Use `/speedread-extract` to pull key numbers, then reference them in a [`/slide-outliner`](https://github.com/MarkellR-RedHat/ai-bu-slide-outliner) presentation.
-- After `/speedread-implement` produces a PoC plan, track progress with [`/shipped-digest`](https://github.com/MarkellR-RedHat/ai-bu-shipped-digest).
-- Feed `/speedread-eli5` output into [`/message-polisher`](https://github.com/MarkellR-RedHat/ai-bu-message-polisher) when briefing stakeholders outside your domain.
+- Run `/speedread-bullets` on a paper, then feed the output to [`/cfp`](https://github.com/MarkellR-RedHat/ai-bu-cfp-generator) when the research inspires a talk proposal.
+- Use `/speedread-extract` to pull key numbers, then reference them in a [`/slides`](https://github.com/MarkellR-RedHat/ai-bu-slide-outliner) presentation.
+- After `/speedread-implement` produces a PoC plan, track progress with [`/shipped`](https://github.com/MarkellR-RedHat/ai-bu-shipped-digest).
+- Feed `/speedread-eli5` output into [`/polish`](https://github.com/MarkellR-RedHat/ai-bu-message-polisher) when briefing stakeholders outside your domain.
 
 ## How It Works
 
