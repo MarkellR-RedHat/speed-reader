@@ -1,20 +1,20 @@
 # Speed Reader
 
-**You have 15 papers in your to-read pile. You will get to three of them this quarter. Maybe.**
+So you've got 15 papers in your to-read pile. You'll get to three of them this quarter. Maybe.
 
-The rest sit there, accumulating guilt and potentially containing the one insight that would have changed your design. Speed Reader gives you the key insight from all fifteen in an afternoon.
+The rest just sit there, accumulating guilt and possibly containing the one insight that would've changed your design. I built this to get the key insight out of all fifteen in an afternoon.
 
-## Before and After
+## before and after
 
-**Before:** Someone drops a paper in Slack. You open it, skim the abstract, promise yourself you will read it this weekend. You do not read it this weekend. Three months later you discover it described the exact architecture you just spent two sprints building from scratch.
+**Before:** someone drops a paper in Slack. You open it, skim the abstract, promise yourself you'll read it this weekend. You don't read it this weekend. Three months later you find out it described the exact architecture you just spent two sprints building from scratch.
 
-**After:** Someone drops a paper in Slack. You run `/speedread-verdict paper.pdf`. Sixty seconds later you know whether to read it, skim it, or skip it, and why. You run `/speedread-implement paper.pdf` on the one that matters and walk into standup with a PoC plan and realistic effort estimates.
+**After:** someone drops a paper in Slack. You run `/speedread-verdict paper.pdf`. Sixty seconds later you know whether to read it, skim it, or skip it, and why. Run `/speedread-implement paper.pdf` on the one that matters and walk into standup with a PoC plan and realistic effort estimates.
 
-## Quick Start
+## quick start
 
 ```bash
-git clone https://github.com/MarkellR-RedHat/ai-bu-speed-reader.git
-cd ai-bu-speed-reader
+git clone https://github.com/MarkellR-RedHat/speed-reader.git
+cd speed-reader
 bash install.sh
 ```
 
@@ -24,11 +24,11 @@ Then restart Claude Code and try this on any PDF, markdown file, or URL:
 /speedread-verdict path/to/paper.pdf
 ```
 
-That is it. You get a decisive, opinionated verdict in under a minute.
+That's it. You get a decisive, opinionated verdict in under a minute.
 
-## Example Output
+## example output
 
-These are not summaries. Summaries give you the gist. These commands give you the insight you would have gotten if you had read the paper carefully: the core contribution, the methodology gaps, the practical implications, and an honest assessment of whether the paper is worth your time at all.
+These aren't summaries. Summaries give you the gist. These commands give you what you'd have gotten from actually reading the paper carefully: the core contribution, the methodology gaps, the practical implications, and an honest call on whether it's worth your time at all.
 
 ### `/speedread-verdict`
 
@@ -69,7 +69,7 @@ in our environment, that is still worth the MVP investment. If the PoC
 shows less than 1.3x, stop.
 ```
 
-## Commands
+## commands
 
 | Command | What it does | When to use it |
 |---------|-------------|----------------|
@@ -87,7 +87,7 @@ shows less than 1.3x, stop.
 
 All commands automatically detect document type (academic paper, RFC/spec, blog post, product docs, report) and adjust their analysis accordingly.
 
-## Usage
+## usage
 
 Every command takes a file path or URL as input:
 
@@ -100,47 +100,47 @@ Every command takes a file path or URL as input:
 
 Supported formats: PDF, Markdown, plain text, and URLs (web pages, blog posts, online docs).
 
-### Typical workflow
+### typical workflow
 
-1. **Triage with `/speedread-verdict`** on every paper that lands in your queue.
-2. **Go deep with `/speedread`** on the ones worth reading.
-3. **Run `/speedread-bias`** before you trust a paper enough to build on it.
-4. **Use `/speedread-implement`** to turn the winner into a PoC plan with effort estimates.
-5. **Extract with `/speedread-bullets`** and drop the summary into Slack, a status update, or a [`/status-report`](https://github.com/MarkellR-RedHat/ai-bu-status-report).
+1. Triage with `/speedread-verdict` on every paper that lands in your queue.
+2. Go deep with `/speedread` on the ones worth reading.
+3. Run `/speedread-bias` before you trust a paper enough to build on it.
+4. Use `/speedread-implement` to turn the winner into a PoC plan with effort estimates.
+5. Extract with `/speedread-bullets` and drop the summary into Slack, a status update, or a [`/status-report`](https://github.com/MarkellR-RedHat/status-report).
 
-**Tip:** One engineer ran `/speedread-verdict` on a backlog of 23 papers before a design review. Eleven got "skip," eight got "skim Section 4 only," and four got "read." The four that mattered went through `/speedread-implement`, and two became sprint items. Total time from backlog to prioritized PoC list: 90 minutes. That backlog had been sitting untouched for six weeks.
+Honestly, the triage step alone is the payoff. I once ran `/speedread-verdict` on a backlog of 23 papers before a design review. Eleven got "skip," eight got "skim Section 4 only," and four got "read." The four that mattered went through `/speedread-implement`, and two became sprint items. Total time from backlog to prioritized PoC list: 90 minutes. That backlog had been sitting untouched for six weeks.
 
-### Cross-tool workflows
+### works with my other tools
 
-Speed Reader pairs well with other tools in the suite:
+Speed Reader plays nicely with the rest of my toolkit:
 
-- Run `/speedread-bullets` on a paper, then feed the output to [`/cfp`](https://github.com/MarkellR-RedHat/ai-bu-cfp-generator) when the research inspires a talk proposal.
-- Use `/speedread-extract` to pull key numbers, then reference them in a [`/slides`](https://github.com/MarkellR-RedHat/ai-bu-slide-outliner) presentation.
-- After `/speedread-implement` produces a PoC plan, track progress with [`/shipped`](https://github.com/MarkellR-RedHat/ai-bu-shipped-digest).
-- Feed `/speedread-eli5` output into [`/polish`](https://github.com/MarkellR-RedHat/ai-bu-message-polisher) when briefing stakeholders outside your domain.
+- Run `/speedread-bullets` on a paper, then feed the output to [`/cfp`](https://github.com/MarkellR-RedHat/cfp-generator) when the research inspires a talk proposal.
+- Use `/speedread-extract` to pull key numbers, then reference them in a [`/slides`](https://github.com/MarkellR-RedHat/slide-outliner) presentation.
+- After `/speedread-implement` produces a PoC plan, track progress with [`/shipped`](https://github.com/MarkellR-RedHat/shipped-digest).
+- Feed `/speedread-eli5` output into [`/polish`](https://github.com/MarkellR-RedHat/message-polisher) when briefing stakeholders outside your domain.
 
-## How It Works
+## how it works
 
-Every prompt is written from the perspective of a skeptical engineer who has already read the document and is now briefing a busy colleague. The output is not a summary. It is advice.
+Every prompt is written from the perspective of a skeptical engineer who's already read the document and is now briefing a busy colleague. The output isn't a summary. It's advice.
 
-- **Opinionated, not diplomatic.** `/speedread-verdict` will tell you to skip a paper. `/speedread-bias` will give a trust score of 3/10 if the methodology is weak. These commands respect your time by being direct.
-- **Calibrated to production reality.** `/speedread-implement` automatically discounts paper results for real-world conditions. A "3x improvement" on synthetic benchmarks becomes "expect 1.5-2x with real traffic" with specific reasoning for the adjustment.
+- **Opinionated, not diplomatic.** `/speedread-verdict` will tell you to skip a paper. `/speedread-bias` will hand out a 3/10 trust score if the methodology is weak. Being direct is the whole point.
+- **Calibrated to production reality.** `/speedread-implement` discounts paper results for real-world conditions. A "3x improvement" on synthetic benchmarks becomes "expect 1.5-2x with real traffic," with specific reasoning for the adjustment.
 - **Document-type-aware.** Academic papers get their baselines checked. Blog posts get their marketing claims flagged. RFCs get their migration burden assessed. Product docs get their lock-in risks called out.
-- **No academic hedging.** You will never see "results suggest," "further research is needed," or "it could be argued" in the output. You get a direct assessment from someone who reads papers to find what is useful for production, not to admire the methodology.
+- **No academic hedging.** You'll never see "results suggest," "further research is needed," or "it could be argued" in the output. You get a direct assessment from someone reading papers to find what's useful in production, not to admire the methodology.
 
-## Reference Materials
+## reference materials
 
-The `reference/` directory includes practical guides for technical reading:
+The `reference/` directory has some practical guides for technical reading:
 
 - `reference/reading-strategies.md` - Six reading strategies matched to different goals: triage reads (2 minutes), three-pass method, adversarial reads, synthesis reads, executive reads, and implementation reads.
 - `reference/common-benchmarks.md` - What MLPerf, MMLU, HumanEval, SWE-bench, vLLM benchmarks, and others actually measure, their known limitations, and how to spot inflated claims that cite them.
-- `reference/reading-papers.md` - The three-pass method for academic papers, red flags to watch for, and what to look for in our specific context.
+- `reference/reading-papers.md` - The three-pass method for academic papers, red flags to watch for, and what to check before building on a result.
 - `reference/reading-rfcs.md` - How to read RFCs, KEPs, and technical proposals efficiently.
 
-## Contributing
+## contributing
 
-Open an issue or PR. If a command gave you bad advice, tell us what it said and why it was wrong.
+Open an issue or PR. If a command gave you bad advice, tell me what it said and why it was wrong.
 
-## License
+## license
 
 Apache-2.0

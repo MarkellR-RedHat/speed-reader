@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================================
-# ai-bu-speed-reader installer
+# speed-reader installer
 #
 # Copies all speedread commands to ~/.claude/commands/ so they show up as
 # slash commands in Claude Code. Safe to re-run at any time; existing files
@@ -14,15 +14,15 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SOURCE_DIR="$SCRIPT_DIR/commands"
 
 echo ""
-echo "  ai-bu-speed-reader"
-echo "  Turn 30-page PDFs into actionable intelligence in under a minute."
+echo "  speed-reader"
+echo "  Turns 30-page PDFs into a straight answer in under a minute."
 echo ""
 
 # ---- Verify source directory exists ----------------------------------------
 
 if [ ! -d "$SOURCE_DIR" ]; then
     echo "  ERROR: commands/ directory not found at $SOURCE_DIR"
-    echo "  Make sure you are running this from the ai-bu-speed-reader repo root."
+    echo "  Make sure you're running this from the speed-reader repo root."
     exit 1
 fi
 

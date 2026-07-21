@@ -1,56 +1,56 @@
-# Reading RFCs Without Getting Lost in the Spec
+# Reading RFCs without getting lost in the spec
 
-A practical guide for engineers who need to evaluate RFCs, KEPs, or technical proposals and figure out what actually matters for their work.
+How I evaluate RFCs, KEPs, and technical proposals and figure out what actually matters, without reading all forty pages.
 
-## What Is an RFC in This Context
+## What counts as an RFC here
 
-This guide covers formal RFCs (IETF, W3C), Kubernetes Enhancement Proposals (KEPs), Python PEPs, and similar structured technical proposals. The reading strategies apply to any document that proposes a change to a shared system or standard.
+This covers formal RFCs (IETF, W3C), Kubernetes Enhancement Proposals (KEPs), Python PEPs, and similar structured technical proposals. The reading strategies apply to any document that proposes a change to a shared system or standard.
 
-## The Four Things to Read First
+## The four things to read first
 
-1. **The summary or abstract.** What is being proposed, in one paragraph.
-2. **The motivation section.** Why does the current state of things need to change? If the motivation is weak or does not match your use cases, the RFC may not be relevant regardless of its technical merits.
+1. **The summary or abstract.** What's being proposed, in one paragraph.
+2. **The motivation section.** Why does the current state of things need to change? If the motivation is weak or doesn't match your use cases, the RFC probably isn't relevant regardless of its technical merits.
 3. **The backward compatibility section.** What breaks? What needs migration? This is where the real cost of adoption lives.
-4. **The alternatives considered section.** This tells you what other approaches were evaluated and rejected, and why. Often more informative than the proposal itself.
+4. **The alternatives considered section.** This tells you what other approaches were evaluated and rejected, and why. Honestly, often more informative than the proposal itself.
 
-## What to Pay Attention To
+## What to pay attention to
 
-### Normative Language
-RFC-style documents use specific keywords defined in RFC 2119: MUST, SHOULD, MAY, MUST NOT, SHOULD NOT. These are not casual word choices. "MUST" means mandatory for compliance. "SHOULD" means recommended but not required. "MAY" means optional. When scanning an RFC, the MUST statements tell you the hard requirements.
+### Normative language
+RFC-style documents use specific keywords defined in RFC 2119: MUST, SHOULD, MAY, MUST NOT, SHOULD NOT. These aren't casual word choices. "MUST" means mandatory for compliance. "SHOULD" means recommended but not required. "MAY" means optional. When scanning an RFC, the MUST statements tell you the hard requirements.
 
-### Scope Boundaries
-Good RFCs clearly state what they cover and what they do not. Pay attention to explicit out-of-scope statements. These often flag areas where problems exist but no one has proposed a solution yet.
+### Scope boundaries
+Good RFCs clearly state what they cover and what they don't. Pay attention to explicit out-of-scope statements. These often flag areas where problems exist but no one has proposed a solution yet.
 
-### Status and Maturity
-- **Draft/Provisional:** Still changing. Do not build on this without expecting rewrites.
-- **Accepted/Approved:** The design is stable but may not be implemented yet.
-- **Implemented/Final:** Shipping in a release. Safe to depend on.
-- **Deprecated/Rejected:** Do not use. Understand why it was rejected if a similar need arises.
+### Status and maturity
+- **Draft/Provisional:** still changing. Don't build on this without expecting rewrites.
+- **Accepted/Approved:** the design is stable but may not be implemented yet.
+- **Implemented/Final:** shipping in a release. Safe to depend on.
+- **Deprecated/Rejected:** don't use. But do understand why it was rejected, in case a similar need comes up.
 
-### Versioning and Timelines
+### Versioning and timelines
 Look for target release versions, deprecation schedules, and migration windows. These determine how urgently you need to act.
 
-## Red Flags
+## Red flags
 
-- **No backward compatibility section.** The authors either have not thought about migration or are avoiding the topic. Both are bad.
-- **Vague migration path.** "Users should update their configurations" without specifying how means nobody has actually tried the migration yet.
-- **Missing security considerations.** Required by IETF RFC format and expected in KEPs. If absent, the proposal has not been seriously reviewed.
-- **No alternatives considered.** Either the authors did not explore the design space, or they are hiding the trade-offs.
+- **No backward compatibility section.** The authors either haven't thought about migration or are avoiding the topic. Both are bad.
+- **Vague migration path.** "Users should update their configurations" without saying how means nobody has actually tried the migration yet.
+- **Missing security considerations.** Required by IETF RFC format and expected in KEPs. If it's absent, the proposal hasn't been seriously reviewed.
+- **No alternatives considered.** Either the authors didn't explore the design space, or they're hiding the trade-offs.
 - **Overly broad scope.** Proposals that try to solve too many problems at once stall or ship incomplete. Every time.
 
-## Reading for Our Context
+## Reading with your own stack in mind
 
-When evaluating RFCs and proposals relevant to Red Hat AI BU work:
+If you run AI or infra workloads, here's where I'd focus:
 
-- **Kubernetes KEPs:** Check which SIG owns the KEP and whether it affects the APIs we depend on for AI workload orchestration. Look at the graduation criteria to understand when features move from alpha to beta to GA.
-- **Networking specs:** Anything affecting gRPC, HTTP/2, or service mesh routing may impact inference serving latency. Check performance implications sections carefully.
-- **Storage and data specs:** Proposals affecting CSI, object storage APIs, or data formats may affect model loading and checkpoint management.
-- **Upstream project proposals:** For projects like vLLM, check whether the proposal's design assumptions align with our disaggregated architecture goals.
+- **Kubernetes KEPs:** check which SIG owns the KEP and whether it touches APIs you depend on for workload orchestration. Look at the graduation criteria to understand when features move from alpha to beta to GA.
+- **Networking specs:** anything affecting gRPC, HTTP/2, or service mesh routing can impact inference serving latency. Read the performance implications sections carefully.
+- **Storage and data specs:** proposals affecting CSI, object storage APIs, or data formats can affect model loading and checkpoint management.
+- **Upstream project proposals:** for projects like vLLM, check whether the proposal's design assumptions line up with the architecture you're actually building toward.
 
-## Useful Questions to Ask Yourself
+## Useful questions to ask yourself
 
-- Does this proposal affect any API surface we depend on?
-- What is the migration timeline, and does it align with our release schedule?
-- Are there open questions in the proposal that could resolve in a way that hurts us?
-- Should we be participating in this RFC's review process?
-- Does this create an opportunity for us to contribute or influence the direction?
+- Does this proposal affect any API surface I depend on?
+- What's the migration timeline, and does it line up with my release schedule?
+- Are there open questions in the proposal that could resolve in a way that hurts me?
+- Should I be participating in this RFC's review process?
+- Is there an opening here to contribute or influence the direction?
