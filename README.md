@@ -106,7 +106,7 @@ Supported formats: PDF, Markdown, plain text, and URLs (web pages, blog posts, o
 2. Go deep with `/speedread` on the ones worth reading.
 3. Run `/speedread-bias` before you trust a paper enough to build on it.
 4. Use `/speedread-implement` to turn the winner into a PoC plan with effort estimates.
-5. Extract with `/speedread-bullets` and drop the summary into Slack, a status update, or a [`/status-report`](https://github.com/MarkellR-RedHat/status-report).
+5. Extract with `/speedread-bullets` and drop the summary into Slack or a status update.
 
 Honestly, the triage step alone is the payoff. I once ran `/speedread-verdict` on a backlog of 23 papers before a design review. Eleven got "skip," eight got "skim Section 4 only," and four got "read." The four that mattered went through `/speedread-implement`, and two became sprint items. Total time from backlog to prioritized PoC list: 90 minutes. That backlog had been sitting untouched for six weeks.
 
@@ -115,9 +115,8 @@ Honestly, the triage step alone is the payoff. I once ran `/speedread-verdict` o
 Speed Reader plays nicely with the rest of my toolkit:
 
 - Run `/speedread-bullets` on a paper, then feed the output to [`/cfp`](https://github.com/MarkellR-RedHat/cfp-generator) when the research inspires a talk proposal.
-- Use `/speedread-extract` to pull key numbers, then reference them in a [`/slides`](https://github.com/MarkellR-RedHat/slide-outliner) presentation.
-- After `/speedread-implement` produces a PoC plan, track progress with [`/shipped`](https://github.com/MarkellR-RedHat/shipped-digest).
-- Feed `/speedread-eli5` output into [`/polish`](https://github.com/MarkellR-RedHat/message-polisher) when briefing stakeholders outside your domain.
+- Run `/speedread-questions` on a draft, then hand the tough ones to [`/red-team`](https://github.com/MarkellR-RedHat/review-as-persona) before you publish.
+- Feed `/speedread-eli5` output into [`/rewrite-for`](https://github.com/MarkellR-RedHat/review-as-persona) when briefing stakeholders outside your domain.
 
 ## how it works
 
